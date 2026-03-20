@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Ouru Superstores Limited — The People's Choice</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --red:#cc0000;--blue:#003399;--dark:#0a0a0a;
+  --light:#f8f8f6;--gold:#d4a017;--gray:#f2f2f0;
+  --muted:#6b6b6b;--white:#ffffff;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--white);color:var(--dark);overflow-x:hidden}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-thumb{background:var(--red)}
+
+/* PAGE SYSTEM */
+.page{display:none}
+.page.active{display:block}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 5%;height:72px;
+  background:rgba(255,255,255,0.97);
+  border-bottom:3px solid var(--red);
+  box-shadow:0 2px 20px rgba(0,0,0,0.08);
+  transition:all 0.3s ease;
+}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;cursor:pointer}
+.nav-logo-icon{width:44px;height:44px;background:var(--red);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;letter-spacing:1px}
+.nav-logo-text{display:flex;flex-direction:column}
+.nav-logo-name{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--dark);letter-spacing:2px;line-height:1}
+.nav-logo-tag{font-size:9px;color:var(--red);font-weight:700;text-transform:uppercase;letter-spacing:3px}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+.nav-links a{font-size:13px;font-weight:600;color:var(--dark);text-decoration:none;text-transform:uppercase;letter-spacing:1px;transition:color 0.2s;position:relative;cursor:pointer}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:2px;background:var(--red);transform:scaleX(0);transition:transform 0.2s}
+.nav-links a:hover{color:var(--red)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-cta{background:var(--red);color:#fff;padding:10px 22px;border-radius:4px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2px;text-decoration:none;transition:background 0.2s;cursor:pointer;border:none;font-family:'Outfit',sans-serif}
+.nav-cta:hover{background:#aa0000}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px}
+.hamburger span{display:block;width:24px;height:2px;background:var(--dark);transition:all 0.3s}
+.mobile-menu{display:none;position:fixed;top:72px;left:0;right:0;background:#fff;z-index:999;padding:20px 5%;border-bottom:3px solid var(--red);flex-direction:column;gap:16px}
+.mobile-menu a{font-size:14px;font-weight:600;color:var(--dark);text-decoration:none;text-transform:uppercase;letter-spacing:1px;padding:8px 0;border-bottom:1px solid #eee;cursor:pointer}
+.mobile-menu.open{display:flex}
+
+/* HERO */
+.hero{min-height:100vh;background:var(--dark);display:flex;align-items:center;position:relative;overflow:hidden;padding-top:72px}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#0a0a0a 0%,#1a0000 40%,#000033 100%)}
+.hero-grid{position:absolute;inset:0;opacity:0.06;background-image:linear-gradient(rgba(255,255,255,0.5) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.5) 1px,transparent 1px);background-size:60px 60px}
+.hero-accent{position:absolute;right:-10%;top:10%;width:600px;height:600px;background:radial-gradient(circle,rgba(204,0,0,0.2) 0%,transparent 70%);border-radius:50%}
+.hero-accent2{position:absolute;left:-5%;bottom:-10%;width:400px;height:400px;background:radial-gradient(circle,rgba(0,51,153,0.2) 0%,transparent 70%);border-radius:50%}
+.hero-content{position:relative;z-index:2;width:90%;max-width:1200px;margin:0 auto;padding:80px 0}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;background:rgba(204,0,0,0.15);border:1px solid rgba(204,0,0,0.4);padding:6px 16px;border-radius:2px;margin-bottom:28px}
+.hero-eyebrow span{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--red)}
+.hero-dot{width:6px;height:6px;background:var(--red);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.5)}}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,8vw,110px);color:#fff;line-height:0.92;letter-spacing:2px;margin-bottom:8px}
+.hero-title span{color:var(--red)}
+.hero-title em{color:var(--blue);font-style:normal}
+.hero-sub{font-size:clamp(14px,2vw,18px);color:rgba(255,255,255,0.6);font-weight:300;max-width:520px;line-height:1.7;margin-bottom:44px;margin-top:20px}
+.hero-sub strong{color:#fff;font-weight:600}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap}
+.btn-primary{background:var(--red);color:#fff;padding:16px 36px;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:2px;text-decoration:none;border-radius:3px;transition:all 0.2s;display:inline-flex;align-items:center;gap:8px;border:2px solid var(--red);cursor:pointer;font-family:'Outfit',sans-serif}
+.btn-primary:hover{background:transparent;color:var(--red)}
+.btn-secondary{background:transparent;color:#fff;padding:16px 36px;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:2px;text-decoration:none;border-radius:3px;transition:all 0.2s;border:2px solid rgba(255,255,255,0.3);cursor:pointer;font-family:'Outfit',sans-serif}
+.btn-secondary:hover{border-color:#fff;background:rgba(255,255,255,0.05)}
+.hero-stats{display:flex;gap:48px;margin-top:64px;padding-top:40px;border-top:1px solid rgba(255,255,255,0.1);flex-wrap:wrap}
+.hero-stat-num{font-family:'Bebas Neue',sans-serif;font-size:44px;color:#fff;line-height:1}
+.hero-stat-num span{color:var(--red)}
+.hero-stat-label{font-size:11px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:2px;margin-top:4px}
+
+/* TICKER */
+.ticker{background:var(--red);padding:12px 0;overflow:hidden}
+.ticker-inner{display:flex;animation:ticker 30s linear infinite;white-space:nowrap}
+.ticker-inner:hover{animation-play-state:paused}
+.ticker-item{display:flex;align-items:center;gap:12px;padding:0 32px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#fff}
+.ticker-sep{color:rgba(255,255,255,0.4)}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SECTIONS */
+.section{padding:100px 5%;width:100%}
+.section-inner{max-width:1200px;margin:0 auto}
+.section-label{display:inline-flex;align-items:center;gap:8px;margin-bottom:16px}
+.section-label span{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--red)}
+.section-label::before{content:'';width:24px;height:2px;background:var(--red)}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,64px);color:var(--dark);line-height:1;letter-spacing:1px;margin-bottom:20px}
+.section-title span{color:var(--red)}
+.section-sub{font-size:16px;color:var(--muted);line-height:1.7;max-width:560px;font-weight:400}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.about-img-wrap{position:relative}
+.about-img-box{width:100%;aspect-ratio:4/5;background:linear-gradient(135deg,var(--red) 0%,#003399 100%);border-radius:4px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center}
+.about-img-pattern{position:absolute;inset:0;opacity:0.1;background-image:repeating-linear-gradient(45deg,#fff 0,#fff 1px,transparent 0,transparent 50%);background-size:20px 20px}
+.about-img-text{position:relative;z-index:2;text-align:center;color:#fff;padding:40px}
+.about-img-year{font-family:'Bebas Neue',sans-serif;font-size:120px;line-height:1;opacity:0.15}
+.about-img-since{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:4px;margin-top:20px}
+.about-badge{position:absolute;bottom:-24px;right:-24px;width:120px;height:120px;background:var(--blue);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;box-shadow:0 8px 32px rgba(0,51,153,0.4)}
+.about-badge-num{font-family:'Bebas Neue',sans-serif;font-size:36px;line-height:1;color:#fff}
+.about-badge-text{font-size:9px;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.7)}
+.about-points{display:flex;flex-direction:column;gap:20px;margin-top:36px}
+.about-point{display:flex;gap:16px;align-items:flex-start}
+.about-point-icon{width:44px;height:44px;background:rgba(204,0,0,0.08);border:1px solid rgba(204,0,0,0.2);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.about-point-title{font-size:14px;font-weight:700;color:var(--dark);margin-bottom:3px}
+.about-point-desc{font-size:13px;color:var(--muted);line-height:1.6}
+
+/* CATEGORIES */
+.categories{background:var(--gray)}
+.cats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:56px}
+.cat-card{background:#fff;border-radius:4px;overflow:hidden;border:1px solid #e8e8e8;transition:all 0.3s ease;cursor:pointer;position:relative}
+.cat-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,0.1);border-color:var(--red)}
+.cat-card-top{padding:32px 24px 24px;position:relative}
+.cat-icon{font-size:36px;margin-bottom:16px;display:block}
+.cat-name{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px;color:var(--dark)}
+.cat-count{font-size:12px;color:var(--muted);margin-top:4px}
+.cat-footer{padding:12px 24px;border-top:1px solid #f0f0f0;display:flex;justify-content:space-between;align-items:center}
+.cat-link{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--red)}
+.cat-arrow{font-size:16px;color:var(--red);transition:transform 0.2s}
+.cat-card:hover .cat-arrow{transform:translateX(4px)}
+.cat-bar{height:3px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform 0.3s}
+.cat-card:hover .cat-bar{transform:scaleX(1)}
+.cat-card:nth-child(2) .cat-bar{background:var(--blue)}
+.cat-card:nth-child(3) .cat-bar{background:var(--gold)}
+.cat-card:nth-child(4) .cat-bar{background:#009900}
+.cat-card:nth-child(5) .cat-bar{background:#cc6600}
+.cat-card:nth-child(6) .cat-bar{background:#660099}
+.cat-card:nth-child(7) .cat-bar{background:#006666}
+.cat-card:nth-child(8) .cat-bar{background:var(--red)}
+
+/* CATALOG PAGE */
+.catalog-page-hdr{background:var(--dark);padding:120px 5% 60px;position:relative;overflow:hidden}
+.catalog-page-hdr::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#0a0a0a 0%,#1a0000 50%,#000033 100%)}
+.catalog-page-hdr::after{content:'';position:absolute;right:-100px;top:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(204,0,0,0.15) 0%,transparent 70%);border-radius:50%}
+.catalog-page-inner{max-width:1200px;margin:0 auto;position:relative;z-index:2}
+.catalog-back{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.4);cursor:pointer;margin-bottom:20px;transition:color 0.2s;border:none;background:none;font-family:'Outfit',sans-serif}
+.catalog-back:hover{color:var(--gold)}
+.catalog-page-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,72px);color:#fff;line-height:1;letter-spacing:2px;margin-bottom:12px}
+.catalog-page-title span{color:var(--red)}
+.catalog-page-sub{font-size:15px;color:rgba(255,255,255,0.45);line-height:1.6;max-width:500px;font-weight:300}
+.catalog-body{padding:60px 5%;background:var(--light)}
+.catalog-body-inner{max-width:1200px;margin:0 auto}
+
+/* PRODUCTS GRID */
+.products-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px;flex-wrap:wrap;gap:20px}
+.products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.prod-card{background:#fff;border:1px solid #ebebeb;border-radius:4px;overflow:hidden;transition:all 0.3s;cursor:pointer}
+.prod-card:hover{box-shadow:0 8px 32px rgba(0,0,0,0.1);transform:translateY(-2px)}
+.prod-img{width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:52px;background:var(--gray);position:relative;overflow:hidden}
+.prod-badge{position:absolute;top:10px;left:10px;background:var(--red);color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:3px 8px;border-radius:2px}
+.prod-badge.new{background:var(--blue)}
+.prod-badge.popular{background:var(--gold)}
+.prod-body{padding:16px}
+.prod-cat{font-size:10px;color:var(--red);font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:6px}
+.prod-name{font-size:14px;font-weight:600;color:var(--dark);margin-bottom:6px;line-height:1.4}
+.prod-desc{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:10px}
+.prod-pricing{display:flex;align-items:center;gap:8px;margin-bottom:3px}
+.prod-price{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--dark)}
+.prod-old{font-size:12px;color:var(--muted);text-decoration:line-through}
+.prod-unit{font-size:11px;color:var(--muted)}
+.prod-footer{padding:12px 16px;border-top:1px solid #f0f0f0;display:flex;justify-content:space-between;align-items:center}
+.prod-add{background:var(--red);color:#fff;border:none;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:8px 14px;border-radius:3px;cursor:pointer;transition:background 0.2s;font-family:'Outfit',sans-serif}
+.prod-add:hover{background:#aa0000}
+.prod-stock{font-size:11px;color:#009900;font-weight:600}
+
+/* WHY */
+.why{background:var(--dark);color:#fff}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-top:60px}
+.why-features{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.why-feat{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:4px;padding:24px;transition:all 0.3s}
+.why-feat:hover{background:rgba(204,0,0,0.08);border-color:rgba(204,0,0,0.3)}
+.why-feat-icon{font-size:28px;margin-bottom:14px}
+.why-feat-title{font-size:14px;font-weight:700;color:#fff;margin-bottom:6px}
+.why-feat-desc{font-size:13px;color:rgba(255,255,255,0.5);line-height:1.6}
+.why-big-stat{background:var(--red);border-radius:4px;padding:48px 40px;text-align:center}
+.why-big-num{font-family:'Bebas Neue',sans-serif;font-size:100px;color:#fff;line-height:1;text-shadow:0 4px 20px rgba(0,0,0,0.3)}
+.why-big-label{font-size:13px;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:3px;margin-top:8px}
+.why-mini-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.why-mini{background:rgba(255,255,255,0.08);border-radius:4px;padding:20px;text-align:center}
+.why-mini-num{font-family:'Bebas Neue',sans-serif;font-size:32px;color:#fff}
+.why-mini-label{font-size:10px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:2px;margin-top:4px}
+
+/* BRANCHES */
+.branches-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+.branch-card{border:1px solid #e8e8e8;border-radius:4px;overflow:hidden;transition:all 0.3s}
+.branch-card:hover{box-shadow:0 8px 32px rgba(0,0,0,0.1);border-color:var(--red)}
+.branch-top{background:linear-gradient(135deg,var(--dark),#001f6b);padding:32px 24px;color:#fff;position:relative;overflow:hidden}
+.branch-top::before{content:'';position:absolute;right:-20px;top:-20px;width:100px;height:100px;background:rgba(204,0,0,0.2);border-radius:50%}
+.branch-flag{font-size:32px;margin-bottom:12px}
+.branch-name{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:1px}
+.branch-county{font-size:11px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:2px;margin-top:4px}
+.branch-body{padding:20px 24px}
+.branch-info{display:flex;flex-direction:column;gap:10px}
+.branch-row{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--muted)}
+.branch-row-icon{flex-shrink:0;color:var(--red)}
+.branch-status{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#009900}
+.branch-status::before{content:'';width:6px;height:6px;background:#009900;border-radius:50%;animation:pulse 2s infinite}
+
+/* CSR */
+.csr{background:var(--blue);color:#fff}
+.csr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:56px}
+.csr-card{text-align:center;padding:32px 24px}
+.csr-icon{font-size:48px;margin-bottom:20px}
+.csr-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:1px;margin-bottom:12px}
+.csr-desc{font-size:14px;color:rgba(255,255,255,0.7);line-height:1.7}
+
+/* TESTIMONIALS */
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+.test-card{background:var(--gray);border-radius:4px;padding:28px;border:1px solid #e8e8e8}
+.test-stars{color:var(--gold);font-size:14px;letter-spacing:2px;margin-bottom:14px}
+.test-text{font-size:14px;color:var(--dark);line-height:1.7;margin-bottom:20px;font-style:italic}
+.test-author{display:flex;align-items:center;gap:12px}
+.test-avatar{width:40px;height:40px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff;flex-shrink:0}
+.test-name{font-size:13px;font-weight:700;color:var(--dark)}
+.test-role{font-size:11px;color:var(--muted)}
+
+/* CTA */
+.cta-section{background:linear-gradient(135deg,var(--red) 0%,#800000 50%,var(--dark) 100%);color:#fff;text-align:center;padding:100px 5%;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;inset:0;opacity:0.05;background-image:repeating-linear-gradient(45deg,#fff 0,#fff 1px,transparent 0,transparent 50%);background-size:30px 30px}
+.cta-inner{position:relative;z-index:2;max-width:700px;margin:0 auto}
+.cta-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,6vw,80px);line-height:1;letter-spacing:2px;margin-bottom:20px}
+.cta-sub{font-size:17px;color:rgba(255,255,255,0.75);line-height:1.7;margin-bottom:40px}
+.cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.btn-white{background:#fff;color:var(--red);padding:16px 40px;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:2px;text-decoration:none;border-radius:3px;transition:all 0.2s;border:2px solid #fff;cursor:pointer;font-family:'Outfit',sans-serif}
+.btn-white:hover{background:transparent;color:#fff}
+.btn-outline-white{background:transparent;color:#fff;padding:16px 40px;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:2px;text-decoration:none;border-radius:3px;transition:all 0.2s;border:2px solid rgba(255,255,255,0.4);cursor:pointer;font-family:'Outfit',sans-serif}
+.btn-outline-white:hover{border-color:#fff;background:rgba(255,255,255,0.05)}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-top:60px}
+.contact-info{display:flex;flex-direction:column;gap:28px}
+.contact-item{display:flex;gap:16px;align-items:flex-start}
+.contact-icon{width:48px;height:48px;background:rgba(204,0,0,0.08);border:1px solid rgba(204,0,0,0.2);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.contact-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:4px}
+.contact-val{font-size:15px;font-weight:600;color:var(--dark)}
+.contact-val a{color:var(--dark);text-decoration:none}
+.contact-val a:hover{color:var(--red)}
+.contact-form{display:flex;flex-direction:column;gap:16px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-field{display:flex;flex-direction:column;gap:6px}
+.form-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted)}
+.form-input{padding:13px 16px;border:1.5px solid #e0e0e0;border-radius:3px;font-size:14px;font-family:'Outfit',sans-serif;color:var(--dark);transition:border 0.2s;outline:none;background:#fff}
+.form-input:focus{border-color:var(--red)}
+.form-textarea{resize:vertical;min-height:120px}
+.form-submit{background:var(--red);color:#fff;border:none;padding:15px 32px;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:2px;border-radius:3px;cursor:pointer;font-family:'Outfit',sans-serif;transition:background 0.2s;align-self:flex-start}
+.form-submit:hover{background:#aa0000}
+
+/* FOOTER */
+footer{background:var(--dark);color:#fff;padding:72px 5% 32px}
+.footer-inner{max-width:1200px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:56px}
+.footer-brand-name{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:3px;color:#fff;margin-bottom:8px}
+.footer-brand-tag{font-size:11px;color:var(--red);font-weight:700;text-transform:uppercase;letter-spacing:3px}
+.footer-brand-desc{font-size:13px;color:rgba(255,255,255,0.4);line-height:1.7;margin-top:16px;max-width:280px}
+.footer-social{display:flex;gap:10px;margin-top:20px}
+.footer-soc{width:36px;height:36px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:14px;text-decoration:none;transition:all 0.2s;color:rgba(255,255,255,0.5);font-weight:700}
+.footer-soc:hover{background:var(--red);border-color:var(--red);color:#fff}
+.footer-col-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:rgba(255,255,255,0.4);margin-bottom:20px}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-links a{font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none;transition:color 0.2s;cursor:pointer}
+.footer-links a:hover{color:var(--red)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.08);padding-top:28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-copy{font-size:12px;color:rgba(255,255,255,0.3)}
+.footer-copy span{color:var(--red)}
+.footer-reg{font-size:11px;color:rgba(255,255,255,0.2)}
+
+/* FADE */
+
+
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .nav-links,.nav-cta{display:none}
+  .hamburger{display:flex}
+  .about-grid,.why-grid,.contact-grid,.footer-top{grid-template-columns:1fr}
+  .cats-grid,.products-grid{grid-template-columns:repeat(2,1fr)}
+  .branches-grid,.csr-grid,.test-grid{grid-template-columns:1fr}
+  .why-features{grid-template-columns:1fr}
+  .hero-stats{gap:28px}
+  .about-badge{display:none}
+  .form-row{grid-template-columns:1fr}
+  #map-reviews .section-inner > div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
+}
+@media(max-width:480px){
+  .cats-grid,.products-grid{grid-template-columns:1fr}
+  .hero-btns,.cta-btns{flex-direction:column}
+  .why-mini-stats{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo" onclick="goHome()">
+    <img src="data:image/jpeg;base64,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vEIeB4hfvZHoAWs0/bdQbN7zcKeisU11tFW/fY+ncN5nDhwPfjuVyrHA8wgKjotN3zWut6bUOpbf9jrfQY9zUcgBe4g5GfOc+b0/dpyyXWXa9e79cqSWKlZF0VNI5vgvHgjgevgPWrOTCApWior3s81zeKuCyz3C03E5a+HiW8S7zHJI7OKmOl79f9RXWrZWWGW22fosNlmdiUv8g7OJ/jxU3LcjBbwQDAx6kBQdgt40BWV9BqPTM1wpXVG9BVQwdLlu6QOrl5PKfPYWiILXeJHXFulTbJKaTNNJNCGuwRzHWFOnDLeLc+Qo1uBuhvBAe0REAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAf/Z" style="height:44px;width:auto;object-fit:contain" alt="Ouru Superstores"/>
+    <div class="nav-logo-text">
+      
+      <span class="nav-logo-tag">The People's Choice</span>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a onclick="goHome()">Home</a></li>
+    <li><a onclick="goHome();goTo('about')">About</a></li>
+    <li><a onclick="showPage('categories')">Products</a></li>
+    <li><a onclick="goHome();goTo('branches')">Branches</a></li>
+    <li><a onclick="goHome();goTo('csr')">Community</a></li>
+    <li><a onclick="goHome();goTo('contact')">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="goHome();goTo('contact')">Order Now</button>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a onclick="goHome();toggleMenu()">Home</a>
+  <a onclick="goHome();goTo('about');toggleMenu()">About</a>
+  <a onclick="showPage('categories');toggleMenu()">Products</a>
+  <a onclick="goHome();goTo('branches');toggleMenu()">Branches</a>
+  <a onclick="goHome();goTo('csr');toggleMenu()">Community</a>
+  <a onclick="goHome();goTo('contact');toggleMenu()">Contact</a>
+</div>
+
+<!-- ======================================================= HOME PAGE -->
+<div id="page-home" class="page active">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-accent"></div>
+  <div class="hero-accent2"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <div class="hero-dot"></div>
+      <span>South Western Kenya's #1 Wholesale &amp; Retail Destination</span>
+    </div>
+    <h1 class="hero-title">
+      OURU<br/>
+      <span>SUPER</span><br/>
+      <em>STORES</em>
+    </h1>
+    <p class="hero-sub">
+      From <strong>construction materials to food stuff</strong> — everything your business needs under one roof. Serving retailers, contractors and families across Kenya since <strong>1991.</strong>
+    </p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="showPage('categories')">Shop Our Catalog &rarr;</button>
+      <button class="btn-secondary" onclick="goTo('contact')">Place a Bulk Order</button>
+    </div>
+    <div class="hero-stats">
+      <div><div class="hero-stat-num">30<span>+</span></div><div class="hero-stat-label">Years in Business</div></div>
+      <div><div class="hero-stat-num">7<span>+</span></div><div class="hero-stat-label">County Presence</div></div>
+      <div><div class="hero-stat-num">1K<span>+</span></div><div class="hero-stat-label">Products</div></div>
+      <div><div class="hero-stat-num">500<span>+</span></div><div class="hero-stat-label">Employees</div></div>
+      <div><div class="hero-stat-num">2B<span>+</span></div><div class="hero-stat-label">KES Annual Revenue</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <div class="ticker-item">Hardware &amp; Construction <span class="ticker-sep">|</span></div>
+    <div class="ticker-item">Food Stuff &amp; FMCG <span class="ticker-sep">|</span></div>
+    <div class="ticker-item">Farm Inputs &amp; Fertilizer <span class="ticker-sep">|</span></div>
+    <div class="ticker-item">Household Products <span class="ticker-sep">|</span></div>
+    <div class="ticker-item">Wholesale &amp; Retail <span class="ticker-sep">|</span></div>
+    <div class="ticker-item">Bulk Order Delivery <span class="ticker-sep">|</span></div>
+    <div class="ticker-item">M-Pesa Till: 346250 <span class="ticker-sep">|</span></div>
+    <div class="ticker-item">EazzyPay: 0766346250 <span class="ticker-sep">|</span></div>
+    <div class="ticker-item">Call: 0722 705114 <span class="ticker-sep">|</span></div>
+    <div class="ticker-item">Hardware &amp; Construction <span class="ticker-sep">|</span></div>
+    <div class="ticker-item">Food Stuff &amp; FMCG <span class="ticker-sep">|</span></div>
+    <div class="ticker-item">Farm Inputs &amp; Fertilizer <span class="ticker-sep">|</span></div>
+    <div class="ticker-item">Household Products <span class="ticker-sep">|</span></div>
+    <div class="ticker-item">Wholesale &amp; Retail <span class="ticker-sep">|</span></div>
+    <div class="ticker-item">Bulk Order Delivery <span class="ticker-sep">|</span></div>
+    <div class="ticker-item">M-Pesa Till: 346250 <span class="ticker-sep">|</span></div>
+    <div class="ticker-item">EazzyPay: 0766346250 <span class="ticker-sep">|</span></div>
+    <div class="ticker-item">Call: 0722 705114 <span class="ticker-sep">|</span></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-img-wrap fade-up">
+        <div class="about-img-box">
+          <div class="about-img-pattern"></div>
+          <div class="about-img-text">
+            <div class="about-img-year">1991</div>
+            <div class="about-img-since">Est. Since 1991</div>
+            <p style="font-size:13px;color:rgba(255,255,255,0.6);margin-top:12px;line-height:1.6">From a single store in Kisii to a regional powerhouse spanning 7 counties</p>
+          </div>
+        </div>
+        <div class="about-badge"><div class="about-badge-num">30+</div><div class="about-badge-text">Years Strong</div></div>
+      </div>
+      <div class="">
+        <div class="section-label"><span>Our Story</span></div>
+        <h2 class="section-title">Built on Trust.<br/><span>Driven by Value.</span></h2>
+        <p class="section-sub">What began as Uhuru Discount Centre in 1991 — founded by the Mogaka family with a bold vision for accessible wholesale retail — has grown into South Western Kenya's most trusted wholesale and retail destination.</p>
+        <div class="about-points">
+          <div class="about-point">
+            <div class="about-point-icon">🏆</div>
+            <div><div class="about-point-title">Market Leader Since 1991</div><div class="about-point-desc">Ouru has long held a commanding position in wholesale business across South Western Kenya — a legacy built on fair prices and unmatched product variety.</div></div>
+          </div>
+          <div class="about-point">
+            <div class="about-point-icon">📍</div>
+            <div><div class="about-point-title">7 Counties. One Standard.</div><div class="about-point-desc">With branches in Kisii, Homabay, Migori, Nyamira, Bomet, Kericho and Transmara — Ouru brings wholesale prices closer to every retailer and family in the region.</div></div>
+          </div>
+          <div class="about-point">
+            <div class="about-point-icon">🤝</div>
+            <div><div class="about-point-title">1,000+ Products. One Destination.</div><div class="about-point-desc">From the smallest retailer restocking shelves to the largest contractor sourcing materials — Ouru serves all with the same commitment to quality, variety and fair pricing.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="section categories" id="categories-home">
+  <div class="section-inner">
+    <div class="section-label"><span>What We Offer</span></div>
+    <h2 class="section-title">Shop by <span>Category</span></h2>
+    <p class="section-sub">Everything under one roof — from construction materials to daily household needs. Click any category to see the full product list.</p>
+    <div class="cats-grid">
+      <div class="cat-card fade-up" onclick="showCatalog('hardware')">
+        <div class="cat-card-top"><span class="cat-icon">🏗️</span><div class="cat-name">Hardware</div><div class="cat-count">Iron sheets, cement, wire mesh, pipes & more</div></div>
+        <div class="cat-footer"><span class="cat-link">View Products</span><span class="cat-arrow">&#8594;</span></div>
+        <div class="cat-bar"></div>
+      </div>
+      <div class="cat-card fade-up" onclick="showCatalog('foodstuff')">
+        <div class="cat-card-top"><span class="cat-icon">🛒</span><div class="cat-name">Food Stuff</div><div class="cat-count">Flour, oil, dairy, grains, beverages & more</div></div>
+        <div class="cat-footer"><span class="cat-link">View Products</span><span class="cat-arrow">&#8594;</span></div>
+        <div class="cat-bar"></div>
+      </div>
+      <div class="cat-card fade-up" onclick="showCatalog('farminputs')">
+        <div class="cat-card-top"><span class="cat-icon">🌾</span><div class="cat-name">Farm Inputs</div><div class="cat-count">Seeds, fertilizer, pesticides & agrochemicals</div></div>
+        <div class="cat-footer"><span class="cat-link">View Products</span><span class="cat-arrow">&#8594;</span></div>
+        <div class="cat-bar"></div>
+      </div>
+      <div class="cat-card fade-up" onclick="showCatalog('household')">
+        <div class="cat-card-top"><span class="cat-icon">🏠</span><div class="cat-name">Household</div><div class="cat-count">Cleaning, kitchenware, mattresses & bedding</div></div>
+        <div class="cat-footer"><span class="cat-link">View Products</span><span class="cat-arrow">&#8594;</span></div>
+        <div class="cat-bar"></div>
+      </div>
+      <div class="cat-card fade-up" onclick="showCatalog('beauty')">
+        <div class="cat-card-top"><span class="cat-icon">💄</span><div class="cat-name">Beauty & Aesthetics</div><div class="cat-count">Skincare, haircare, cosmetics & toiletries</div></div>
+        <div class="cat-footer"><span class="cat-link">View Products</span><span class="cat-arrow">&#8594;</span></div>
+        <div class="cat-bar"></div>
+      </div>
+      <div class="cat-card fade-up" onclick="showCatalog('confectionery')">
+        <div class="cat-card-top"><span class="cat-icon">🍬</span><div class="cat-name">Confectionery</div><div class="cat-count">Biscuits, snacks, sweets & soft drinks</div></div>
+        <div class="cat-footer"><span class="cat-link">View Products</span><span class="cat-arrow">&#8594;</span></div>
+        <div class="cat-bar"></div>
+      </div>
+      <div class="cat-card fade-up" onclick="showCatalog('storage')">
+        <div class="cat-card-top"><span class="cat-icon">📦</span><div class="cat-name">Storage Solutions</div><div class="cat-count">Water tanks, drums, containers & crates</div></div>
+        <div class="cat-footer"><span class="cat-link">View Products</span><span class="cat-arrow">&#8594;</span></div>
+        <div class="cat-bar"></div>
+      </div>
+      <div class="cat-card fade-up" onclick="showCatalog('stationery')">
+        <div class="cat-card-top"><span class="cat-icon">📝</span><div class="cat-name">Stationery</div><div class="cat-count">Office supplies, school materials & printing</div></div>
+        <div class="cat-footer"><span class="cat-link">View Products</span><span class="cat-arrow">&#8594;</span></div>
+        <div class="cat-bar"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PRODUCTS -->
+<section class="section" id="products">
+  <div class="section-inner">
+    <div class="products-header">
+      <div><div class="section-label"><span>Featured Products</span></div><h2 class="section-title">Top <span>Sellers</span></h2></div>
+      <button class="btn-primary" style="align-self:flex-end" onclick="showPage('categories')">View Full Catalog &rarr;</button>
+    </div>
+    <div class="products-grid">
+      <div class="prod-card fade-up">
+        <div class="prod-img">🥛<div class="prod-badge">Sale</div></div>
+        <div class="prod-body">
+          <div class="prod-cat">Food Stuff</div>
+          <div class="prod-name">Mount Kenya UHT Milk 200ml</div>
+          <div class="prod-desc">Rich in calcium and vitamins A and B12. Sterilized for ambient storage. No refrigeration needed.</div>
+          <div class="prod-pricing"><span class="prod-price">KES 1,240</span><span class="prod-old">KES 1,255</span></div>
+          <div class="prod-unit">Per carton (12 pcs)</div>
+        </div>
+        <div class="prod-footer"><span class="prod-stock">In Stock</span><button class="prod-add" onclick="addFeedback(this)">Add to Order</button></div>
+      </div>
+      <div class="prod-card fade-up">
+        <div class="prod-img">🔗</div>
+        <div class="prod-body">
+          <div class="prod-cat">Hardware</div>
+          <div class="prod-name">Chain Link Wire Mesh Fence 18M</div>
+          <div class="prod-desc">Galvanized steel chain link fence. Weather resistant and rust proof for residential and commercial use.</div>
+          <div class="prod-pricing"><span class="prod-price">KES 33,000</span><span class="prod-old">KES 33,100</span></div>
+          <div class="prod-unit">Per 18M roll</div>
+        </div>
+        <div class="prod-footer"><span class="prod-stock">In Stock</span><button class="prod-add" onclick="addFeedback(this)">Add to Order</button></div>
+      </div>
+      <div class="prod-card fade-up">
+        <div class="prod-img">🌾<div class="prod-badge new">New</div></div>
+        <div class="prod-body">
+          <div class="prod-cat">Farm Inputs</div>
+          <div class="prod-name">CAN Fertilizer 50kg Bag</div>
+          <div class="prod-desc">Calcium Ammonium Nitrate. Ideal for top dressing maize, tea, wheat and vegetables.</div>
+          <div class="prod-pricing"><span class="prod-price">KES 3,800</span></div>
+          <div class="prod-unit">Per 50kg bag</div>
+        </div>
+        <div class="prod-footer"><span class="prod-stock">In Stock</span><button class="prod-add" onclick="addFeedback(this)">Add to Order</button></div>
+      </div>
+      <div class="prod-card fade-up">
+        <div class="prod-img">🫙</div>
+        <div class="prod-body">
+          <div class="prod-cat">Food Stuff</div>
+          <div class="prod-name">Rina Vegetable Oil 5 Litre</div>
+          <div class="prod-desc">Triple refined pure vegetable palm oil. Non-sticky, extended shelf life. Ideal for frying.</div>
+          <div class="prod-pricing"><span class="prod-price">KES 985</span></div>
+          <div class="prod-unit">Per 5L container</div>
+        </div>
+        <div class="prod-footer"><span class="prod-stock">In Stock</span><button class="prod-add" onclick="addFeedback(this)">Add to Order</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY OURU -->
+<section class="section why">
+  <div class="section-inner">
+    <div class="section-label"><span style="color:var(--red)">Why Choose Us</span></div>
+    <h2 class="section-title" style="color:#fff">Why Retailers Choose <span>Ouru</span></h2>
+    <div class="why-grid">
+      <div class="why-features">
+        <div class="why-feat fade-up"><div class="why-feat-icon">💰</div><div class="why-feat-title">Lowest Wholesale Prices</div><div class="why-feat-desc">Direct sourcing from Kenya's leading manufacturers means real savings passed directly to you. No middleman markups.</div></div>
+        <div class="why-feat fade-up"><div class="why-feat-icon">📦</div><div class="why-feat-title">1,000+ Products</div><div class="why-feat-desc">Hardware, food stuff, farm inputs, household goods — one trip to Ouru covers your entire restocking list.</div></div>
+        <div class="why-feat fade-up"><div class="why-feat-icon">🚚</div><div class="why-feat-title">Bulk Delivery Service</div><div class="why-feat-desc">Ouru branded vehicles handle large orders across 7 counties. Real-time delivery tracking ensures stock arrives on time.</div></div>
+        <div class="why-feat fade-up"><div class="why-feat-icon">📱</div><div class="why-feat-title">M-Pesa Payments</div><div class="why-feat-desc">Instant payments via M-Pesa Till 346250 or EazzyPay 0766346250. Fast, secure and completely paperless.</div></div>
+        <div class="why-feat fade-up"><div class="why-feat-icon">🤝</div><div class="why-feat-title">Dedicated Support</div><div class="why-feat-desc">Real-time customer support and after-sale services. Our team handles your orders and inquiries promptly.</div></div>
+        <div class="why-feat fade-up"><div class="why-feat-icon">⭐</div><div class="why-feat-title">94% Satisfaction Rate</div><div class="why-feat-desc">Over 94% of our customers recommend Ouru Superstores. Trust built over three decades of consistent service.</div></div>
+      </div>
+      <div class="">
+        <div class="why-big-stat"><div class="why-big-num">94%</div><div class="why-big-label">Customer Satisfaction Rate</div></div>
+        <div class="why-mini-stats">
+          <div class="why-mini"><div class="why-mini-num">30+</div><div class="why-mini-label">Years</div></div>
+          <div class="why-mini"><div class="why-mini-num">7</div><div class="why-mini-label">Counties</div></div>
+          <div class="why-mini"><div class="why-mini-num">500+</div><div class="why-mini-label">Staff</div></div>
+          <div class="why-mini"><div class="why-mini-num">1K+</div><div class="why-mini-label">Products</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRANCHES -->
+<section class="section" id="branches">
+  <div class="section-inner">
+    <div class="section-label"><span>Find Us</span></div>
+    <h2 class="section-title">Our <span>Branches</span></h2>
+    <p class="section-sub">Strategically located across South Western Kenya — bringing wholesale prices closer to you.</p>
+    <div class="branches-grid">
+      <div class="branch-card fade-up">
+        <div class="branch-top"><div class="branch-flag">🏢</div><div class="branch-name">Kisii Head Office</div><div class="branch-county">Kisii County</div></div>
+        <div class="branch-body"><div class="branch-info">
+          <div class="branch-row"><span class="branch-row-icon">📍</span><span>Ouru Complex, Hospital Road, Kisii Town</span></div>
+          <div class="branch-row"><span class="branch-row-icon">📞</span><span>+254 722 705 114</span></div>
+          <div class="branch-row"><span class="branch-row-icon">✉️</span><span>info@ourusuperstores.com</span></div>
+          <div class="branch-row"><span class="branch-row-icon">📱</span><span>M-Pesa Till: 346250 | EazzyPay: 0766346250</span></div>
+        </div><div class="branch-status">Open Now</div></div>
+      </div>
+      <div class="branch-card fade-up">
+        <div class="branch-top"><div class="branch-flag">🏪</div><div class="branch-name">Homabay Branch</div><div class="branch-county">Homabay County</div></div>
+        <div class="branch-body"><div class="branch-info">
+          <div class="branch-row"><span class="branch-row-icon">📍</span><span>Homabay Town Centre, Homabay</span></div>
+          <div class="branch-row"><span class="branch-row-icon">📞</span><span>+254 722 705 114</span></div>
+          <div class="branch-row"><span class="branch-row-icon">📦</span><span>Full Product Range — Wholesale &amp; Retail</span></div>
+        </div><div class="branch-status">Open Now</div></div>
+      </div>
+      <div class="branch-card fade-up">
+        <div class="branch-top"><div class="branch-flag">🏪</div><div class="branch-name">Migori Branch</div><div class="branch-county">Migori County</div></div>
+        <div class="branch-body"><div class="branch-info">
+          <div class="branch-row"><span class="branch-row-icon">📍</span><span>Migori Town, Migori County</span></div>
+          <div class="branch-row"><span class="branch-row-icon">📞</span><span>+254 722 705 114</span></div>
+          <div class="branch-row"><span class="branch-row-icon">📦</span><span>FMCG, Hardware &amp; Farm Inputs</span></div>
+        </div><div class="branch-status">Open Now</div></div>
+      </div>
+      <div class="branch-card fade-up">
+        <div class="branch-top"><div class="branch-flag">🏪</div><div class="branch-name">Nyamira Branch</div><div class="branch-county">Nyamira County</div></div>
+        <div class="branch-body"><div class="branch-info">
+          <div class="branch-row"><span class="branch-row-icon">📍</span><span>Nyamira Town, Nyamira County</span></div>
+          <div class="branch-row"><span class="branch-row-icon">📞</span><span>+254 722 705 114</span></div>
+          <div class="branch-row"><span class="branch-row-icon">📦</span><span>Full Product Range Available</span></div>
+        </div><div class="branch-status">Open Now</div></div>
+      </div>
+      <div class="branch-card fade-up">
+        <div class="branch-top"><div class="branch-flag">🏪</div><div class="branch-name">Bomet Branch</div><div class="branch-county">Bomet County</div></div>
+        <div class="branch-body"><div class="branch-info">
+          <div class="branch-row"><span class="branch-row-icon">📍</span><span>Bomet Town, Bomet County</span></div>
+          <div class="branch-row"><span class="branch-row-icon">📞</span><span>+254 722 705 114</span></div>
+          <div class="branch-row"><span class="branch-row-icon">📦</span><span>Hardware &amp; FMCG Specialist Branch</span></div>
+        </div><div class="branch-status">Open Now</div></div>
+      </div>
+      <div class="branch-card fade-up">
+        <div class="branch-top" style="background:linear-gradient(135deg,#cc0000,#800000)"><div class="branch-flag">🚀</div><div class="branch-name">Expanding Fast</div><div class="branch-county">More Counties Coming</div></div>
+        <div class="branch-body"><div class="branch-info">
+          <div class="branch-row"><span class="branch-row-icon">📍</span><span>Kericho, Transmara and more counties coming soon</span></div>
+          <div class="branch-row"><span class="branch-row-icon">📞</span><span>Contact us to inquire about your area</span></div>
+          <div class="branch-row"><span class="branch-row-icon">✉️</span><span>info@ourusuperstores.com</span></div>
+        </div><div class="branch-status" style="color:var(--gold)">Coming Soon</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CSR -->
+<section class="section csr" id="csr">
+  <div class="section-inner">
+    <div class="section-label"><span style="color:rgba(255,255,255,0.6)">Corporate Social Responsibility</span></div>
+    <h2 class="section-title" style="color:#fff">Giving Back to <span style="color:rgba(255,255,255,0.5)">Our Community</span></h2>
+    <p class="section-sub" style="color:rgba(255,255,255,0.65)">Ouru Superstores is committed to active contribution to the communities and environment we operate in.</p>
+    <div class="csr-grid">
+      <div class="csr-card fade-up"><div class="csr-icon">🎓</div><div class="csr-title">Education Support</div><div class="csr-desc">Supporting high-performing students from needy backgrounds. Investing in the next generation of Kenyan leaders.</div></div>
+      <div class="csr-card fade-up"><div class="csr-icon">🌱</div><div class="csr-title">Agricultural Growth</div><div class="csr-desc">Supporting farmers through distribution of quality seeds and fertilizer at subsidized rates. Building food security across the region.</div></div>
+      <div class="csr-card fade-up"><div class="csr-icon">❤️</div><div class="csr-title">Orphanage Support</div><div class="csr-desc">Contributing to orphanage homes to ensure vulnerable children have access to basic needs, care and a better future.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section" id="testimonials">
+  <div class="section-inner">
+    <div class="section-label"><span>What Customers Say</span></div>
+    <h2 class="section-title">Trusted by <span>Thousands</span></h2>
+    <div class="test-grid">
+      <div class="test-card fade-up">
+        <div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="test-text">"I have been restocking my shop from Ouru for over 10 years. The prices are unbeatable and the variety is incredible. I never need to go anywhere else."</div>
+        <div class="test-author"><div class="test-avatar">JO</div><div><div class="test-name">Jane Otieno</div><div class="test-role">Retail Shop Owner, Kisii</div></div></div>
+      </div>
+      <div class="test-card fade-up">
+        <div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="test-text">"As a contractor, I source all my hardware from Ouru. The iron sheets and cement are genuine quality at wholesale prices. Their delivery service is excellent."</div>
+        <div class="test-author"><div class="test-avatar">MK</div><div><div class="test-name">Michael Kibet</div><div class="test-role">Building Contractor, Bomet</div></div></div>
+      </div>
+      <div class="test-card fade-up">
+        <div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="test-text">"The farm inputs from Ouru have transformed my yields. Quality seeds and fertilizer at prices that make sense for a small farmer like me. True people's choice."</div>
+        <div class="test-author"><div class="test-avatar">RO</div><div><div class="test-name">Rose Ondiek</div><div class="test-role">Farmer, Migori County</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner fade-up">
+    <h2 class="cta-title">Ready to Order?<br/>Let's Talk Business.</h2>
+    <p class="cta-sub">Whether you're a retailer restocking shelves, a contractor sourcing materials or a household looking for the best prices — Ouru Superstores has everything you need.</p>
+    <div class="cta-btns">
+      <button class="btn-white" onclick="goTo('contact')">Place a Bulk Order</button>
+      <a href="tel:+254722705114" class="btn-outline-white">Call Us: 0722 705114</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="section-inner">
+    <div class="section-label"><span>Get In Touch</span></div>
+    <h2 class="section-title">Contact <span>Us</span></h2>
+    <div class="contact-grid">
+      <div class="contact-info fade-up">
+        <p style="font-size:16px;color:var(--muted);line-height:1.7;margin-bottom:8px">Place your order, ask about pricing or inquire about a product. Our team responds within 24 hours.</p>
+        <div class="contact-item"><div class="contact-icon">📍</div><div><div class="contact-label">Head Office</div><div class="contact-val">Ouru Complex, Hospital Road<br/>Kisii Town, Kenya</div></div></div>
+        <div class="contact-item"><div class="contact-icon">📞</div><div><div class="contact-label">Phone</div><div class="contact-val"><a href="tel:+254722705114">+254 722 705 114</a></div></div></div>
+        <div class="contact-item"><div class="contact-icon">✉️</div><div><div class="contact-label">Email</div><div class="contact-val"><a href="mailto:info@ourusuperstores.com">info@ourusuperstores.com</a></div></div></div>
+        <div class="contact-item"><div class="contact-icon">📱</div><div><div class="contact-label">M-Pesa Payments</div><div class="contact-val">Till No: 346250<br/>EazzyPay: 0766346250</div></div></div>
+        <div class="contact-item"><div class="contact-icon">🕒</div><div><div class="contact-label">Business Hours</div><div class="contact-val">Monday to Saturday: 7:00 AM – 7:00 PM<br/>Sunday: 9:00 AM – 5:00 PM</div></div></div>
+      </div>
+      <div class="">
+        <form class="contact-form" onsubmit="submitForm(event)">
+          <div class="form-row">
+            <div class="form-field"><label class="form-label">Your Name</label><input class="form-input" placeholder="John Kamau" required/></div>
+            <div class="form-field"><label class="form-label">Phone Number</label><input class="form-input" placeholder="0722 000 000" required/></div>
+          </div>
+          <div class="form-field"><label class="form-label">Email Address</label><input class="form-input" type="email" placeholder="john@business.com"/></div>
+          <div class="form-field"><label class="form-label">Subject</label>
+            <select class="form-input">
+              <option>Bulk Order Inquiry</option>
+              <option>Product Availability</option>
+              <option>Pricing Information</option>
+              <option>Delivery Inquiry</option>
+              <option>General Inquiry</option>
+            </select>
+          </div>
+          <div class="form-field"><label class="form-label">Message / Order Details</label><textarea class="form-input form-textarea" placeholder="Describe your order or inquiry in detail..."></textarea></div>
+          <button type="submit" class="form-submit">Send Message &rarr;</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLOATING WHATSAPP + EMAIL BUTTONS -->
+<div style="position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:12px;align-items:flex-end">
+  <a href="mailto:info@ourusuperstores.com?subject=Product%20Inquiry%20%2F%20Bulk%20Order&body=Hello%20Ouru%20Superstores%2C%0A%0AI%20am%20interested%20in%20placing%20an%20order%20and%20would%20like%20to%20inquire%20about%20the%20following%3A%0A%0AProduct(s)%3A%0AQuantity%3A%0ADelivery%20Location%3A%0A%0APlease%20send%20me%20a%20quotation%20at%20your%20earliest%20convenience.%0A%0AThank%20you." title="Email Us" style="width:52px;height:52px;background:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(204,0,0,0.4);text-decoration:none;transition:transform 0.2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+  </a>
+  <a href="https://wa.me/254722705114?text=Hello%20Ouru%20Superstores!%20%F0%9F%91%8B%0A%0AI%20found%20your%20website%20and%20would%20like%20to%20inquire%20about%20your%20products.%0A%0AProduct(s)%20I%20need%3A%0AQuantity%3A%0ADelivery%20Location%3A%0A%0AKindly%20advise%20on%20availability%20and%20pricing.%20Thank%20you!" target="_blank" title="Chat on WhatsApp" style="width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,0.4);text-decoration:none;transition:transform 0.2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</div>
+
+<!-- MAP + GOOGLE REVIEWS -->
+<section class="section" id="map-reviews" style="background:var(--light);padding-top:80px;padding-bottom:80px">
+  <div class="section-inner">
+    <div class="section-label"><span>Find Us &amp; Reviews</span></div>
+    <h2 class="section-title">Visit Us &amp; <span>See What People Say</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:40px">
+
+      <!-- GOOGLE MAP -->
+      <div>
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:12px">Our Location — Kisii Head Office</div>
+        <div style="border-radius:8px;overflow:hidden;border:1px solid var(--border, #e8e8e8);box-shadow:0 4px 20px rgba(0,0,0,0.08)">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.5!2d34.7617!3d-0.6817!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182b0000000000%3A0x0!2sOuru+Superstores+Kisii!5e0!3m2!1sen!2ske!4v1"
+            width="100%" height="380" style="border:0;display:block"
+            allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+        <a href="https://maps.google.com/?q=Ouru+Superstores+Hospital+Road+Kisii" target="_blank" style="display:inline-flex;align-items:center;gap:8px;margin-top:14px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--red);text-decoration:none">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Open in Google Maps &rarr;
+        </a>
+      </div>
+
+      <!-- GOOGLE REVIEWS -->
+      <div>
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:12px">Google Reviews</div>
+        <div style="background:#fff;border:1px solid #e8e8e8;border-radius:8px;padding:24px;box-shadow:0 4px 20px rgba(0,0,0,0.06)">
+
+          <!-- Rating Summary -->
+          <div style="display:flex;align-items:center;gap:20px;padding-bottom:20px;border-bottom:1px solid #f0f0f0;margin-bottom:20px">
+            <div style="text-align:center">
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:64px;color:var(--dark);line-height:1">4.2</div>
+              <div style="color:var(--gold);font-size:18px;letter-spacing:2px">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+              <div style="font-size:11px;color:var(--muted);margin-top:4px">Google Rating</div>
+            </div>
+            <div style="flex:1">
+              <div style="display:flex;flex-direction:column;gap:6px">
+                <div style="display:flex;align-items:center;gap:8px"><span style="font-size:11px;color:var(--muted);width:12px">5</span><div style="flex:1;height:6px;background:#f0f0f0;border-radius:3px;overflow:hidden"><div style="width:55%;height:100%;background:var(--gold);border-radius:3px"></div></div></div>
+                <div style="display:flex;align-items:center;gap:8px"><span style="font-size:11px;color:var(--muted);width:12px">4</span><div style="flex:1;height:6px;background:#f0f0f0;border-radius:3px;overflow:hidden"><div style="width:25%;height:100%;background:var(--gold);border-radius:3px"></div></div></div>
+                <div style="display:flex;align-items:center;gap:8px"><span style="font-size:11px;color:var(--muted);width:12px">3</span><div style="flex:1;height:6px;background:#f0f0f0;border-radius:3px;overflow:hidden"><div style="width:10%;height:100%;background:var(--gold);border-radius:3px"></div></div></div>
+                <div style="display:flex;align-items:center;gap:8px"><span style="font-size:11px;color:var(--muted);width:12px">2</span><div style="flex:1;height:6px;background:#f0f0f0;border-radius:3px;overflow:hidden"><div style="width:5%;height:100%;background:var(--gold);border-radius:3px"></div></div></div>
+                <div style="display:flex;align-items:center;gap:8px"><span style="font-size:11px;color:var(--muted);width:12px">1</span><div style="flex:1;height:6px;background:#f0f0f0;border-radius:3px;overflow:hidden"><div style="width:5%;height:100%;background:var(--gold);border-radius:3px"></div></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Individual Reviews -->
+          <div style="display:flex;flex-direction:column;gap:16px">
+            <div style="padding-bottom:16px;border-bottom:1px solid #f0f0f0">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">
+                <div style="display:flex;align-items:center;gap:8px">
+                  <div style="width:32px;height:32px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff">JM</div>
+                  <div><div style="font-size:13px;font-weight:700;color:var(--dark)">John Mwangi</div><div style="font-size:10px;color:var(--muted)">2 weeks ago</div></div>
+                </div>
+                <div style="color:var(--gold);font-size:12px">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              </div>
+              <div style="font-size:13px;color:var(--muted);line-height:1.6">"Best wholesale prices in Kisii. I always come here for my hardware supplies. Wide variety and genuine products."</div>
+            </div>
+            <div style="padding-bottom:16px;border-bottom:1px solid #f0f0f0">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">
+                <div style="display:flex;align-items:center;gap:8px">
+                  <div style="width:32px;height:32px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff">AW</div>
+                  <div><div style="font-size:13px;font-weight:700;color:var(--dark)">Agnes Wambui</div><div style="font-size:10px;color:var(--muted)">1 month ago</div></div>
+                </div>
+                <div style="color:var(--gold);font-size:12px">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              </div>
+              <div style="font-size:13px;color:var(--muted);line-height:1.6">"Ouru is my go-to for everything from food stuff to farm inputs. Staff are helpful and prices are fair."</div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">
+                <div style="display:flex;align-items:center;gap:8px">
+                  <div style="width:32px;height:32px;border-radius:50%;background:#009900;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff">PO</div>
+                  <div><div style="font-size:13px;font-weight:700;color:var(--dark)">Peter Otieno</div><div style="font-size:10px;color:var(--muted)">2 months ago</div></div>
+                </div>
+                <div style="color:var(--gold);font-size:12px">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+              </div>
+              <div style="font-size:13px;color:var(--muted);line-height:1.6">"Good selection of fertilizers and farm inputs. Delivery was on time. Will definitely order again."</div>
+            </div>
+          </div>
+
+          <!-- Write Review Button -->
+          <a href="https://search.google.com/local/writereview?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:20px;padding:12px;border:1.5px solid #e0e0e0;border-radius:6px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--dark);text-decoration:none;transition:all 0.2s" onmouseover="this.style.borderColor='var(--red)';this.style.color='var(--red)'" onmouseout="this.style.borderColor='#e0e0e0';this.style.color='var(--dark)'">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            Write a Google Review
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">OURU SUPERSTORES</div>
+        <div class="footer-brand-tag">The People's Choice Since 1991</div>
+        <p class="footer-brand-desc">South Western Kenya's leading wholesaler and distributor — serving retailers, contractors and families across 7 counties with over 1,000 products.</p>
+        <div class="footer-social">
+          <a href="https://facebook.com/ourusuperstores" class="footer-soc" target="_blank">f</a>
+          <a href="https://instagram.com/ourusuperstores" class="footer-soc" target="_blank">ig</a>
+          <a href="https://twitter.com/OuruSuper" class="footer-soc" target="_blank">tw</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Products</div>
+        <ul class="footer-links">
+          <li><a onclick="showCatalog('hardware')">Hardware</a></li>
+          <li><a onclick="showCatalog('foodstuff')">Food Stuff</a></li>
+          <li><a onclick="showCatalog('farminputs')">Farm Inputs</a></li>
+          <li><a onclick="showCatalog('household')">Household</a></li>
+          <li><a onclick="showCatalog('confectionery')">Confectionery</a></li>
+          <li><a onclick="showCatalog('beauty')">Beauty & Aesthetics</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a onclick="goTo('about')">About Ouru</a></li>
+          <li><a onclick="goTo('branches')">Our Branches</a></li>
+          <li><a onclick="goTo('csr')">Community</a></li>
+          <li><a onclick="goTo('testimonials')">Testimonials</a></li>
+          <li><a onclick="goTo('map-reviews')">Our Location</a></li>
+          <li><a onclick="goTo('map-reviews')">Google Reviews</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <ul class="footer-links">
+          <li><a href="tel:+254722705114">0722 705 114</a></li>
+          <li><a href="mailto:info@ourusuperstores.com">info@ourusuperstores.com</a></li>
+          <li><a>Hospital Road, Kisii Town</a></li>
+          <li><a>M-Pesa Till: 346250</a></li>
+          <li><a>Mon–Sat: 7AM – 7PM</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">&copy; 2025 <span>Ouru Superstores Limited.</span> All Rights Reserved. Kisii, Kenya.</div>
+      <div class="footer-reg">Incorporated 2004 &mdash; The People's Choice</div>
+    </div>
+  </div>
+</footer>
+
+</div><!-- end home page -->
+
+<!-- ======================================================= CATEGORIES PAGE -->
+<div id="page-categories" class="page">
+  <div style="padding-top:72px;background:var(--dark);min-height:60vh;position:relative;overflow:hidden">
+    <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0a0a0a 0%,#1a0000 50%,#000033 100%)"></div>
+    <div style="position:absolute;right:-100px;top:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(204,0,0,0.15) 0%,transparent 70%);border-radius:50%"></div>
+    <div style="position:absolute;left:-50px;bottom:-50px;width:400px;height:400px;background:radial-gradient(circle,rgba(0,51,153,0.15) 0%,transparent 70%);border-radius:50%"></div>
+    <div style="max-width:1200px;margin:0 auto;padding:80px 5%;position:relative;z-index:2">
+      <button class="catalog-back" onclick="goHome()">&larr; Back to Home</button>
+      <h1 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,6vw,80px);color:#fff;line-height:1;letter-spacing:2px;margin-bottom:16px">Shop by <span style="color:var(--red)">Category</span></h1>
+      <p style="font-size:16px;color:rgba(255,255,255,0.45);max-width:500px;line-height:1.7;font-weight:300">1,000+ products across 8 categories. Click any category to see the full product list with prices and descriptions.</p>
+    </div>
+  </div>
+  <div style="background:var(--light);padding:60px 5%">
+    <div style="max-width:1200px;margin:0 auto">
+      <div class="cats-grid">
+        <div class="cat-card" onclick="showCatalog('hardware')">
+          <div class="cat-card-top"><span class="cat-icon">🏗️</span><div class="cat-name">Hardware</div><div class="cat-count">Iron sheets, cement, wire mesh, pipes, nails, fittings & more</div></div>
+          <div class="cat-footer"><span class="cat-link">25+ Products</span><span class="cat-arrow">&#8594;</span></div>
+          <div class="cat-bar"></div>
+        </div>
+        <div class="cat-card" onclick="showCatalog('foodstuff')">
+          <div class="cat-card-top"><span class="cat-icon">🛒</span><div class="cat-name">Food Stuff</div><div class="cat-count">Flour, cooking oil, dairy, grains, beverages & staple foods</div></div>
+          <div class="cat-footer"><span class="cat-link">30+ Products</span><span class="cat-arrow">&#8594;</span></div>
+          <div class="cat-bar"></div>
+        </div>
+        <div class="cat-card" onclick="showCatalog('farminputs')">
+          <div class="cat-card-top"><span class="cat-icon">🌾</span><div class="cat-name">Farm Inputs</div><div class="cat-count">Certified seeds, CAN, DAP, pesticides & agrochemicals</div></div>
+          <div class="cat-footer"><span class="cat-link">20+ Products</span><span class="cat-arrow">&#8594;</span></div>
+          <div class="cat-bar"></div>
+        </div>
+        <div class="cat-card" onclick="showCatalog('household')">
+          <div class="cat-card-top"><span class="cat-icon">🏠</span><div class="cat-name">Household</div><div class="cat-count">Cleaning products, mattresses, kitchenware & bedding</div></div>
+          <div class="cat-footer"><span class="cat-link">20+ Products</span><span class="cat-arrow">&#8594;</span></div>
+          <div class="cat-bar"></div>
+        </div>
+        <div class="cat-card" onclick="showCatalog('beauty')">
+          <div class="cat-card-top"><span class="cat-icon">💄</span><div class="cat-name">Beauty & Aesthetics</div><div class="cat-count">Skincare, haircare, cosmetics & personal care</div></div>
+          <div class="cat-footer"><span class="cat-link">15+ Products</span><span class="cat-arrow">&#8594;</span></div>
+          <div class="cat-bar"></div>
+        </div>
+        <div class="cat-card" onclick="showCatalog('confectionery')">
+          <div class="cat-card-top"><span class="cat-icon">🍬</span><div class="cat-name">Confectionery</div><div class="cat-count">Biscuits, sweets, snacks, soft drinks & juices</div></div>
+          <div class="cat-footer"><span class="cat-link">20+ Products</span><span class="cat-arrow">&#8594;</span></div>
+          <div class="cat-bar"></div>
+        </div>
+        <div class="cat-card" onclick="showCatalog('storage')">
+          <div class="cat-card-top"><span class="cat-icon">📦</span><div class="cat-name">Storage Solutions</div><div class="cat-count">Water tanks, HDPE drums, crates & containers</div></div>
+          <div class="cat-footer"><span class="cat-link">10+ Products</span><span class="cat-arrow">&#8594;</span></div>
+          <div class="cat-bar"></div>
+        </div>
+        <div class="cat-card" onclick="showCatalog('stationery')">
+          <div class="cat-card-top"><span class="cat-icon">📝</span><div class="cat-name">Stationery</div><div class="cat-count">Exercise books, pens, printing paper & office supplies</div></div>
+          <div class="cat-footer"><span class="cat-link">15+ Products</span><span class="cat-arrow">&#8594;</span></div>
+          <div class="cat-bar"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================================================= CATALOG PAGE -->
+<div id="page-catalog" class="page">
+  <div class="catalog-page-hdr">
+    <div class="catalog-page-inner">
+      <button class="catalog-back" onclick="showPage('categories')">&larr; All Categories</button>
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px">
+        <div>
+          <h1 class="catalog-page-title" id="cat-title">Hardware <span>Products</span></h1>
+          <p class="catalog-page-sub" id="cat-sub">All hardware and construction materials</p>
+        </div>
+        <button class="btn-primary" onclick="goHome();goTo('contact')">Place Bulk Order</button>
+      </div>
+    </div>
+  </div>
+  <div class="catalog-body">
+    <div class="catalog-body-inner">
+      <div class="products-grid" id="cat-products"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+var PRODUCTS = {
+  hardware:[
+    {icon:'🔗',cat:'Hardware',name:'Chain Link Wire Mesh Fence 18M',desc:'Galvanized steel chain link fence. Weather resistant and rust proof. Suitable for residential and commercial fencing.',price:'KES 33,000',old:'KES 33,100',unit:'Per 18M roll',tag:'Sale'},
+    {icon:'🔩',cat:'Hardware',name:'G.I Back Nut Fittings',desc:'Galvanized iron back nut pipe fittings for plumbing and construction installations. Available in multiple sizes.',price:'KES 290',old:'KES 300',unit:'Per piece',tag:'Sale'},
+    {icon:'🏗️',cat:'Hardware',name:'Portland Cement 50kg — Simba',desc:'High quality Portland cement for construction. Ideal for foundations, walls and general masonry work.',price:'KES 720',old:'',unit:'Per bag',tag:''},
+    {icon:'🔧',cat:'Hardware',name:'Iron Binding Wire — 2kg Roll',desc:'Galvanized binding wire for construction use. Strong and flexible for tying reinforcement bars.',price:'KES 580',old:'KES 590',unit:'Per 2kg roll',tag:'Sale'},
+    {icon:'🪝',cat:'Hardware',name:'GI Roofing Nails — 1kg Pack',desc:'Hot-dip galvanized roofing nails. Rust resistant for long-lasting roof fastening.',price:'KES 180',old:'',unit:'Per 1kg pack',tag:''},
+    {icon:'💧',cat:'Hardware',name:'PVC Water Pipes 3/4 inch',desc:'High quality PVC pressure pipes for water supply. Lightweight, durable and chemical resistant.',price:'KES 420',old:'',unit:'Per 6M length',tag:''},
+    {icon:'🏠',cat:'Hardware',name:'Corrugated Iron Sheets 30 Gauge',desc:'Hot-dip galvanized corrugated roofing sheets. Strong and weather resistant for all roofing applications.',price:'KES 1,200',old:'KES 1,250',unit:'Per sheet (3M)',tag:'Popular'},
+    {icon:'🧱',cat:'Hardware',name:'Building Sand — 1 Tonne',desc:'Clean washed river sand suitable for concrete mixing, plastering and block laying.',price:'KES 3,500',old:'',unit:'Per tonne',tag:''},
+  ],
+  foodstuff:[
+    {icon:'🥛',cat:'Food Stuff',name:'Mount Kenya UHT Milk 200ml',desc:'UHT milk rich in calcium, phosphorus, vitamins A and B12. Sterilized for ambient storage.',price:'KES 1,240',old:'KES 1,255',unit:'Per carton (12 pcs)',tag:'Sale'},
+    {icon:'🌾',cat:'Food Stuff',name:"Kenya's Pride Bakers Flour 50kg",desc:'Perfect for bread, buns and pastries. High water absorption and gluten index. Fortified with vitamins.',price:'KES 4,210',old:'',unit:'Per 50kg bag',tag:'New'},
+    {icon:'🫙',cat:'Food Stuff',name:'Rina Vegetable Oil 5 Litre',desc:'Triple refined pure vegetable palm oil. Non-sticky, low smoke point, extended shelf life.',price:'KES 985',old:'KES 970',unit:'Per 5L container',tag:''},
+    {icon:'🥞',cat:'Food Stuff',name:'EXE Unga Mandazi Flour 2kg',desc:'Made from fine wheat flour and special raising agents for fluffy mandazis. Does not absorb oil.',price:'KES 200',old:'',unit:'Per 2kg pack',tag:''},
+    {icon:'🌿',cat:'Food Stuff',name:'Unga Dola Maize Flour 2kg',desc:'Finely milled maize flour for ugali. Enriched with iron and zinc. Consistent texture every time.',price:'KES 180',old:'',unit:'Per 2kg pack',tag:'Popular'},
+    {icon:'🥤',cat:'Food Stuff',name:'Daima Long Life Milk 500ml',desc:'Full cream long life milk. Rich in calcium and protein. Ideal for tea, cooking and drinking.',price:'KES 730',old:'KES 745',unit:'Per carton',tag:'Sale'},
+    {icon:'🧂',cat:'Food Stuff',name:'Pembe Sifted Maize Flour 2kg',desc:'Premium sifted maize meal for smooth, lump-free ugali. A staple in every Kenyan household.',price:'KES 170',old:'',unit:'Per 2kg pack',tag:''},
+    {icon:'🫖',cat:'Food Stuff',name:'Kericho Gold Tea Bags 100 Pack',desc:'Premium Kenyan tea from the highlands. Rich flavour and aroma. Perfect for retail stock.',price:'KES 650',old:'',unit:'Per 100 bag pack',tag:''},
+  ],
+  farminputs:[
+    {icon:'🌱',cat:'Farm Inputs',name:'Certified Hybrid Maize Seeds 10kg',desc:'High yielding certified hybrid maize seeds. Disease resistant and drought tolerant for reliable harvests.',price:'KES 1,650',old:'',unit:'Per 10kg bag',tag:'New'},
+    {icon:'⚗️',cat:'Farm Inputs',name:'CAN Fertilizer 50kg',desc:'Calcium Ammonium Nitrate fertilizer. Ideal for top dressing maize, tea, wheat and vegetables.',price:'KES 3,800',old:'',unit:'Per 50kg bag',tag:'Popular'},
+    {icon:'🧪',cat:'Farm Inputs',name:'DAP Fertilizer 50kg',desc:'Di-Ammonium Phosphate fertilizer for basal application. Boosts root development and early plant growth.',price:'KES 5,200',old:'',unit:'Per 50kg bag',tag:''},
+    {icon:'🌿',cat:'Farm Inputs',name:'NPK 17-17-17 Fertilizer 50kg',desc:'Balanced NPK compound fertilizer suitable for a wide range of crops including tea and horticulture.',price:'KES 4,800',old:'',unit:'Per 50kg bag',tag:''},
+    {icon:'🐛',cat:'Farm Inputs',name:'Dimethoate Pesticide 1L',desc:'Systemic insecticide effective against aphids, thrips, whiteflies and other sucking insects on crops.',price:'KES 850',old:'',unit:'Per 1L bottle',tag:''},
+    {icon:'🌽',cat:'Farm Inputs',name:'Pioneer P3253 Maize Seeds 10kg',desc:'Pioneer certified hybrid seeds. Very high yield potential with excellent standability and disease resistance.',price:'KES 2,200',old:'',unit:'Per 10kg bag',tag:'Popular'},
+  ],
+  household:[
+    {icon:'🧼',cat:'Household',name:'White Wash Grade I Bar Soap 800g',desc:'Grade I multipurpose soap. Lathers in hard or soft water. For utensils, laundry and body wash.',price:'KES 580',old:'KES 590',unit:'Per piece',tag:'Sale'},
+    {icon:'🛏️',cat:'Household',name:'Medium Density Mattress',desc:'Comfortable medium density foam mattress. Available in multiple sizes. Durable and hygienic.',price:'KES 1,985',old:'KES 2,000',unit:'Per piece (single)',tag:'Sale'},
+    {icon:'🧴',cat:'Household',name:'Omo Washing Powder 1kg',desc:'Powerful laundry detergent for both hand and machine washing. Removes tough stains in one wash.',price:'KES 280',old:'',unit:'Per 1kg pack',tag:''},
+    {icon:'🪣',cat:'Household',name:'Plastic Jerry Can 20L',desc:'Heavy duty HDPE food grade plastic jerry can. Ideal for water storage and transportation.',price:'KES 450',old:'',unit:'Per piece',tag:''},
+    {icon:'🧹',cat:'Household',name:'Broom & Dustpan Set',desc:'Hard wearing plastic broom with dustpan. Effective for both indoor and outdoor sweeping.',price:'KES 320',old:'',unit:'Per set',tag:''},
+    {icon:'🍳',cat:'Household',name:'Aluminium Sufuria Set 4pc',desc:'Heavy gauge aluminium cooking pots. Durable for everyday cooking. Set includes 4 different sizes.',price:'KES 1,435',old:'KES 1,450',unit:'Per 4pc set',tag:'Sale'},
+  ],
+  beauty:[
+    {icon:'🧴',cat:'Beauty',name:'Geisha Body Lotion 400ml',desc:'Nourishing body lotion enriched with Vitamin E and natural extracts for smooth, radiant skin.',price:'KES 280',old:'',unit:'Per bottle',tag:''},
+    {icon:'🫧',cat:'Beauty',name:'Lux Beauty Soap 175g',desc:'Premium beauty soap with natural fragrances. Gentle on skin and leaves you feeling fresh all day.',price:'KES 95',old:'',unit:'Per bar',tag:'Popular'},
+    {icon:'💆',cat:'Beauty',name:'Dark & Lovely Hair Relaxer Kit',desc:'Complete hair relaxer kit with conditioning treatment. Leaves hair smooth, manageable and shiny.',price:'KES 650',old:'',unit:'Per kit',tag:''},
+    {icon:'🌸',cat:'Beauty',name:'Nivea Body Cream 400ml',desc:'Classic Nivea moisturizing cream. Enriched with Eucerit for deep moisturization that lasts all day.',price:'KES 580',old:'',unit:'Per 400ml tub',tag:''},
+    {icon:'🦷',cat:'Beauty',name:'Colgate Toothpaste 100ml',desc:'Triple action toothpaste for protection against cavities, whitening and fresh breath confidence.',price:'KES 120',old:'',unit:'Per tube',tag:''},
+  ],
+  confectionery:[
+    {icon:'🍪',cat:'Confectionery',name:'Digestive Biscuits Carton',desc:'Classic digestive biscuits made with wholemeal wheat flour. A perfect snack for all occasions.',price:'KES 2,100',old:'',unit:'Per carton',tag:'Popular'},
+    {icon:'🥤',cat:'Confectionery',name:'Coca Cola 300ml Crate 24 pcs',desc:'The world favourite soft drink. Cold and refreshing. Per crate for retail and wholesale buyers.',price:'KES 1,380',old:'KES 1,385',unit:'Per crate (24 pcs)',tag:'Sale'},
+    {icon:'🍬',cat:'Confectionery',name:'Assorted Sweets 1kg Bag',desc:'Colourful assorted hard candy sweets. Perfect for retail counter sales and household enjoyment.',price:'KES 350',old:'',unit:'Per 1kg bag',tag:''},
+    {icon:'🧃',cat:'Confectionery',name:'Afia Juice 500ml Carton',desc:'Natural fruit juice in assorted flavours. Made from real fruit concentrate with no artificial colours.',price:'KES 1,820',old:'KES 1,835',unit:'Per carton (12 pcs)',tag:'Sale'},
+    {icon:'🍫',cat:'Confectionery',name:'Cadbury Drinking Chocolate 500g',desc:'Rich and creamy Cadbury drinking chocolate. Made with real cocoa for an indulgent experience.',price:'KES 620',old:'',unit:'Per 500g tin',tag:''},
+    {icon:'🥜',cat:'Confectionery',name:'Honey Roasted Groundnuts 500g',desc:'Premium honey roasted groundnuts. Crunchy, sweet and satisfying. Ideal snack for retail.',price:'KES 280',old:'',unit:'Per 500g pack',tag:'New'},
+  ],
+  storage:[
+    {icon:'💧',cat:'Storage',name:'Roto Water Tank 5000L',desc:'High quality polyethylene water storage tank. UV stabilized, food grade material. Includes fittings.',price:'KES 28,500',old:'',unit:'Per tank',tag:''},
+    {icon:'🛢️',cat:'Storage',name:'HDPE Drum 200L',desc:'Heavy duty food grade HDPE drum with lid and lock ring. For liquid storage and industrial use.',price:'KES 3,200',old:'',unit:'Per drum',tag:''},
+    {icon:'📦',cat:'Storage',name:'Roto Water Tank 1000L',desc:'Compact 1000L polyethylene storage tank. Perfect for households and small commercial installations.',price:'KES 8,500',old:'',unit:'Per tank',tag:'Popular'},
+    {icon:'🗃️',cat:'Storage',name:'Plastic Crates Stackable 30L',desc:'Durable stackable plastic storage crates. Ideal for produce, beverages and general warehousing.',price:'KES 650',old:'',unit:'Per crate',tag:''},
+  ],
+  stationery:[
+    {icon:'📒',cat:'Stationery',name:'Exercise Book 96 Pages',desc:'High quality ruled exercise book with durable cover. Suitable for primary and secondary students.',price:'KES 45',old:'',unit:'Per book',tag:''},
+    {icon:'🖊️',cat:'Stationery',name:'Bic Ballpoint Pens Box of 50',desc:'Smooth writing Bic ballpoint pens in blue and black. Reliable and long lasting for office use.',price:'KES 750',old:'',unit:'Per box (50 pcs)',tag:'Popular'},
+    {icon:'📋',cat:'Stationery',name:'A4 Printing Paper Ream 80gsm',desc:'Premium 80gsm white printing paper. For laser and inkjet printers, photocopiers and office use.',price:'KES 850',old:'',unit:'Per ream (500 sheets)',tag:''},
+    {icon:'📁',cat:'Stationery',name:'Foolscap Files Box of 100',desc:'Durable foolscap suspension files with coloured tabs. For office filing systems and document storage.',price:'KES 1,200',old:'',unit:'Per box (100 pcs)',tag:''},
+  ]
+};
+
+var CAT_INFO = {
+  hardware:  ['Hardware <span style="color:var(--red)">Products</span>','Iron sheets, cement, wire mesh, pipes, nails, fittings and construction materials'],
+  foodstuff: ['Food Stuff <span style="color:var(--red)">&amp; FMCG</span>','Flour, cooking oil, dairy products, beverages and staple food items'],
+  farminputs:['Farm Inputs <span style="color:var(--red)">&amp; Agrochemicals</span>','Certified seeds, fertilizers, pesticides and agrochemicals'],
+  household: ['Household <span style="color:var(--red)">Products</span>','Cleaning products, mattresses, kitchenware, bedding and home essentials'],
+  beauty:    ['Beauty <span style="color:var(--red)">&amp; Aesthetics</span>','Skincare, haircare, cosmetics, soaps, lotions and personal care products'],
+  confectionery:['Confectionery <span style="color:var(--red)">&amp; Snacks</span>','Biscuits, sweets, soft drinks, juices, snacks and confections'],
+  storage:   ['Storage <span style="color:var(--red)">Solutions</span>','Water tanks, HDPE drums, stackable crates and industrial containers'],
+  stationery:['Stationery <span style="color:var(--red)">&amp; Office</span>','Exercise books, pens, printing paper and office supplies']
+};
+
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
+  var pg = document.getElementById('page-' + id);
+  if (pg) { pg.classList.add('active'); window.scrollTo(0,0); }
+}
+
+function goHome() { showPage('home'); }
+
+function goTo(id) {
+  setTimeout(function() {
+    var el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior:'smooth', block:'start' });
+  }, 120);
+}
+
+function showCatalog(cat) {
+  var info = CAT_INFO[cat] || [cat, ''];
+  document.getElementById('cat-title').innerHTML = info[0];
+  document.getElementById('cat-sub').textContent = info[1];
+  var prods = PRODUCTS[cat] || [];
+  var html = '';
+  prods.forEach(function(p) {
+    var tagHtml = '';
+    if (p.tag === 'Sale') tagHtml = '<div class="prod-badge">Sale</div>';
+    else if (p.tag === 'New') tagHtml = '<div class="prod-badge new">New</div>';
+    else if (p.tag === 'Popular') tagHtml = '<div class="prod-badge popular">Popular</div>';
+    var oldHtml = p.old ? '<span class="prod-old">'+p.old+'</span>' : '';
+    html += '<div class="prod-card">' +
+      '<div class="prod-img">' + p.icon + tagHtml + '</div>' +
+      '<div class="prod-body">' +
+        '<div class="prod-cat">' + p.cat + '</div>' +
+        '<div class="prod-name">' + p.name + '</div>' +
+        '<div class="prod-desc">' + p.desc + '</div>' +
+        '<div class="prod-pricing"><span class="prod-price">' + p.price + '</span>' + oldHtml + '</div>' +
+        '<div class="prod-unit">' + p.unit + '</div>' +
+      '</div>' +
+      '<div class="prod-footer"><span class="prod-stock">In Stock</span><button class="prod-add" onclick="addFeedback(this)">Add to Order</button></div>' +
+    '</div>';
+  });
+  document.getElementById('cat-products').innerHTML = html;
+  showPage('catalog');
+}
+
+function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+
+function addFeedback(btn) {
+  var orig = btn.textContent;
+  btn.textContent = 'Added!';
+  btn.style.background = '#009900';
+  setTimeout(function(){ btn.textContent = orig; btn.style.background = ''; }, 1500);
+}
+
+function submitForm(e) {
+  e.preventDefault();
+  var btn = e.target.querySelector('.form-submit');
+  btn.textContent = 'Message Sent!';
+  btn.style.background = '#009900';
+  setTimeout(function(){ btn.textContent = 'Send Message \u2192'; btn.style.background = ''; e.target.reset(); }, 3000);
+}
+
+// Nav scroll
+window.addEventListener('scroll', function() {
+  var nav = document.getElementById('navbar');
+  if (nav) nav.style.boxShadow = window.scrollY > 50 ? '0 4px 24px rgba(0,0,0,0.12)' : '0 2px 20px rgba(0,0,0,0.08)';
+});
+</script>
+</body>
+</html>
